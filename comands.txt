@@ -1,0 +1,14 @@
+sudo docker build -t django .
+sudo docker-compose up
+sudo docker exec -it aaf9cce4ee87 sh
+django-admin startproject mysite
+python3 manage.py runserver 0.0.0.0:8000
+python3 manage.py startapp polls 
+python3 manage.py migrate 
+sudo docker exec -it aaf9cce4ee87 sh (postgresdb)
+python manage.py makemigrations polls
+python3 manage.py sqlmigrate polls 0001
+python manage.py migrate
+
+
+
