@@ -4,17 +4,104 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>polls templates</title>
+    <title>Polls</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .no-polls {
+            color: #777;
+        }
+        .button-styling {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    </style>
 </head>
 <body>
-    {% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+
+
+
+
+
+
+        <div class="container">
+            <h1>Latest Polls</h1>
+            {% if latest_question_list %}
+                <ul>
+                    {% for question in latest_question_list %}
+                        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-polls">No polls are available.</p>
+            {% endif %}
+            
+            <!-- Add a button and a form for selecting the question number -->
+            <button id="resultButton" class="button-styling">View Results</button>
+            <form id="questionForm" style="display: none;">
+                <div style="text-align: center;">
+                    <label for="questionNumber">Enter Question Number: </label>
+                    <input type="number" id="questionNumber" name="questionNumber" required>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button id="submitButton" class="button-styling">Submit</button>
+                </div>
+            </form>
+            
+        </div>
+        <script>
+            document.getElementById('resultButton').addEventListener('click', function() {
+                // Show the question number input form when the button is clicked
+                document.getElementById('questionForm').style.display = 'block';
+            });
+        
+            document.getElementById('questionForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const questionNumber = document.getElementById('questionNumber').value;
+                // Redirect to /polls/${questionNumber}/results
+                window.location.href = `/polls/${questionNumber}/results/`;
+            });
+        </script>
+        
+
+
+
+
+
+
 </body>
 </html>

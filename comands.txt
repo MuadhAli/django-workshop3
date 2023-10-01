@@ -12,3 +12,7 @@ python manage.py migrate
 
 
 
+systemctl status postgresql
+systemctl start postgresql
+sudo -u postgres createuser afrah
+

@@ -80,7 +80,7 @@ DATABASES = {
  'NAME': os.environ.get('POSTGRES_NAME'),
  'USER': os.environ.get('POSTGRES_USER'),
  'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
- 'HOST': 'db',
+ 'HOST': os.environ.get('POSTGRES_HOST'),
  'PORT': 5432,
 }
 }
@@ -116,7 +116,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

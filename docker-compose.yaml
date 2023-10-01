@@ -1,7 +1,7 @@
 version: "3.3"
 services:
  db:
-    container_name: 'database-postgres'
+    container_name: 'mydb'
     image: postgres:14-alpine
     volumes:
       - ./data/db:/var/lib/postgresql/data
@@ -21,3 +21,10 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    depends_on:
+      - db 
+
+
+
+      
